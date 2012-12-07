@@ -7,6 +7,8 @@ jQuery ($) ->
     )(e)
   , false
 
+  window.onbeforeunload = () ->
+    s.close()
 
   $("#send_comment").on 'click', () ->
     $.post(@form.action + '.json', $(@form).serialize())
