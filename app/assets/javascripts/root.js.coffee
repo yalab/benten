@@ -3,7 +3,14 @@ jQuery ($) ->
   s = new EventSource('/streams/comments')
   s.addEventListener 'message', (e) ->
     ((e)->
-      $('body').append($('<p>').text(e.data))
+      comment = $.parseJSON(e.data)
+      $('#comments').prepend(
+        $('<tr>').append(
+          $('<td>').attr('class', 'span10').text(comment.body)
+        ).append(
+          $('<td>').text(comment.created_at.replace('T', ' ').replace(/:\d\dZ/, ''))
+        )
+      )
     )(e)
   , false
 

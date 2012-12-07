@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span4">
+    <div class="span12">
       <p>
         <%= form_for(@comment) do |f| %>
           <%= f.text_field :body %>
@@ -8,6 +8,14 @@
           <%= f.submit id: 'send_comment' %>
         <% end %>
       </p>
+      <table id="comments">
+        <% @comments.each do |c| %>
+          <tr>
+            <td class="span10"><%= c.body %></td>
+            <td><%= c.created_at.strftime("%F %H:%M") %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@ class CommentObserver < ActiveRecord::Observer
   def after_create(comment)
     CommentObserver.stream_pool.each do |stream|
       begin
-        stream.write "data: #{comment.body}\n\n"
+        stream.write "data: #{comment.to_json}\n\n"
       rescue IOError
       ensure
         stream.close
